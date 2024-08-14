@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: mariadb
+    build:
+      context: /home/hbay/Documents/srcs/requirements/mariadb
+    env_file:
+      - /home/hbay/Documents/srcs/.env
+    volumes:
+      - data:/var/lib/mysql
+    # ports:
+    #   - "3306:3306"
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: /home/hbay/Documents/srcs/requirements/wordpress
+    env_file:
+      - /home/hbay/Documents/srcs/.env
+    volumes:
+      - ./wordpress_data:/var/www/html
+    # ports:
+    #   - "8080:8080"
+    # depends_on:
+    #   - db
+
+  nginx:
+    container_name: nginx
+    build:
+      context: /home/hbay/Documents/srcs/requirements/nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./wordpress_data:/var/www/html
+    depends_on:
+      - wordpress
+
+volumes:
+  data:
+    driver: local
+  wordpress_data:
+    driver: local
