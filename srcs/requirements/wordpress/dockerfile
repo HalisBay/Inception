@@ -1,21 +1,13 @@
 FROM debian:buster
-
-# Gerekli paketleri yükleyin
 RUN apt-get update && \
     apt-get install -y php-fpm php-mysql wget && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-# Gerekli dizinleri oluşturun
-RUN mkdir -p /var/www/html/wordpress /run/php
-
-# WordPress'i kurun
+RUN mkdir -p /var/www/html/wordpress  /run/php
 RUN wget https://wordpress.org/latest.tar.gz && \
     tar -xzf latest.tar.gz -C /var/www/html/wordpress --strip-components=1 && \
     rm latest.tar.gz
-
-# PHP-FPM'in varsayılan portunu açın
-EXPOSE 9000
-COPY conf/www.conf /etc/php/7.3/fpm/pool.d/.
-# PHP-FPM'i başlatın
-CMD ["php-fpm7.3","-F"]
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/.
+COPY ./tools/wordpress.sh /usr/local/bin/wordpress.sh
+RUN chmod +x /usr/local/bin/wordpress.sh
+CMD ["/usr/local/bin/wordpress.sh"]

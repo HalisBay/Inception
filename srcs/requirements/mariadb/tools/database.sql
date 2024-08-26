@@ -1,0 +1,6 @@
+CREATE DATABASE IF NOT EXISTS wordpress;
+CREATE USER 'hbay'@'%' IDENTIFIED BY 'root123';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'hbay'@'%';
+CREATE USER 'root'@'localhost' IDENTIFIED BY 'root123';
+
+FLUSH PRIVILEGES;
