@@ -1,13 +1,19 @@
 FROM debian:buster
+
 RUN apt-get update &&\
     apt-get install -y \
     nginx openssl\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
 RUN mkdir -p /etc/nginx/ssl
+
 EXPOSE 80
+
 COPY conf/default /etc/nginx/sites-enabled/.
 COPY tools/. var/www
+
 RUN chmod +x /var/www/ssh.sh
+
 ENTRYPOINT ["var/www/ssh.sh"]
 CMD ["nginx", "-g", "daemon off;"]
