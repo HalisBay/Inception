@@ -1,6 +1,11 @@
 #!/bin/sh
 cd /var/www/html
 
+if [ -d "wp-content" ] && [ -f "wp-config.php" ]; then
+  echo "WordPress zaten kurulmuş."
+  exit 0
+fi
+
 wget https://wordpress.org/latest.tar.gz
 tar xzf latest.tar.gz
 mv wordpress/* .
