@@ -13,14 +13,6 @@ up:
 down:
 	docker-compose -f ./srcs/docker-compose.yml down
 
-.PHONY: stop
-stop:
-	docker-compose -f ./srcs/docker-compose.yml stop
-
-.PHONY: start
-start:
-	docker-compose -f ./srcs/docker-compose.yml start
-
 .PHONY: status
 status:
 	docker ps

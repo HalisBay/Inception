@@ -1,6 +1,5 @@
 FROM debian:buster
 
-
 RUN apt-get update && \
     apt-get install -y \
     mariadb-server \
@@ -14,4 +13,7 @@ EXPOSE 3306
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/.
 COPY tools/database.sql /etc/mysql/database.sql
-CMD ["bash", "-c", "mysql_install_db --user=mysql && mysqld"]
+COPY tools/create.sh /usr/local/bin/create.sh
+RUN chmod +x /usr/local/bin/create.sh
+
+CMD ["/usr/local/bin/create.sh"]
