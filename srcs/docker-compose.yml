@@ -4,11 +4,11 @@ services:
   mariadb:
     container_name: mariadb
     build:
-      context: /home/hbay/srcs/requirements/mariadb/.
+      context: ./requirements/mariadb/.
     env_file:
-      - /home/hbay/srcs/.env
+      - ./.env
     volumes:
-      - data:/var/lib/mysql
+      - /home/hbay/data/mariadb_data:/var/lib/mysql
     # ports:
     #   - "3306:3306"
     networks:
@@ -17,11 +17,11 @@ services:
   wordpress:
     container_name: wordpress
     build:
-      context: /home/hbay/srcs/requirements/wordpress/.
+      context: ./requirements/wordpress/.
     env_file:
-      - /home/hbay/srcs/.env
+      - ./.env
     volumes:
-      - /home/hbay/srcs/wordpress_data:/var/www/html
+      - /home/hbay/data/wordpress_data:/var/www/html
     # ports:
     #   - "8080:8080"
     depends_on:
@@ -32,11 +32,11 @@ services:
   nginx:
     container_name: nginx
     build:
-      context: /home/hbay/srcs/requirements/nginx/.
+      context: ./requirements/nginx/.
     ports:
       - "443:443"
     volumes:
-      - /home/hbay/srcs/wordpress_data:/var/www/html
+      - /home/hbay/data/wordpress_data:/var/www/html
     depends_on:
       - wordpress
     networks:

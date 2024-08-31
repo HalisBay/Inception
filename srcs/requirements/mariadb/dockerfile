@@ -14,4 +14,4 @@ EXPOSE 3306
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/.
 COPY tools/database.sql /etc/mysql/database.sql
-CMD ["mysqld"]
+CMD ["bash", "-c", "mysql_install_db --user=mysql && mysqld"]
