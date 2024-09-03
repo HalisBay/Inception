@@ -12,7 +12,7 @@ RUN mkdir /run/mysqld && \
 EXPOSE 3306
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/.
-COPY tools/database.sql /etc/mysql/database.sql
+# COPY tools/database.sql /etc/mysql/database.sql
 COPY tools/create.sh /usr/local/bin/create.sh
 RUN chmod +x /usr/local/bin/create.sh
 

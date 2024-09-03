@@ -7,6 +7,7 @@ services:
       context: ./requirements/mariadb/.
     env_file:
       - ./.env
+    restart: always
     volumes:
       - /home/hbay/data/mariadb_data:/var/lib/mysql
     # ports:
@@ -20,6 +21,7 @@ services:
       context: ./requirements/wordpress/.
     env_file:
       - ./.env
+    restart: unless-stopped
     volumes:
       - /home/hbay/data/wordpress_data:/var/www/html
     # ports:
@@ -37,6 +39,7 @@ services:
       - "443:443"
     volumes:
       - /home/hbay/data/wordpress_data:/var/www/html
+    restart: on-failure
     depends_on:
       - wordpress
     networks:
