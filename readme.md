@@ -1,10 +1,15 @@
 # Inception: Docker System Administration Project
 
+
+![ekran](schema.png)
+
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [General Guidelines](#general-guidelines)
 - [Mandatory Part](#mandatory-part)
 - [Directory Structure](#directory-structure)
+
 
 ## Introduction
 This project aims to broaden your knowledge of system administration by using Docker. You will virtualize several Docker images, creating them in your new personal virtual machine.
